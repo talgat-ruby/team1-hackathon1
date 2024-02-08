@@ -4,13 +4,15 @@ import EditButton from "../components/buttons/EditButton";
 import VoteButton from "../components/buttons/VoteButton";
 
 
-const ChildComments = () =>  {
+
+
+const ChildComments = (answer_count, comment_id) =>  {
 
     return (
         <>
                     <article className="comment" data-key="id_3" data-parent-id="id_2">
 						<header>
-							<VoteButton/>
+							<VoteButton votes='777'/>
 							
 							<h2 className="author">Mr Smith</h2>
 							<time className="date">2 month ago</time>
