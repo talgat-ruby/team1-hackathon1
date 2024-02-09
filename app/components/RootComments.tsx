@@ -8,41 +8,67 @@ import VoteButton from "../components/buttons/VoteButton";
 import UpdateForm from "../components/forms/UpdateForm";
 
 
-const RootComments = () =>  {
+const getData = async () => {
+    try {
+
+      const response = await fetch('http://localhost:8081/api/v1/comments?user=amyrobson');
+
+      if(!response.ok){
+        throw new Error("Failed to fetch");
+      }
+      const data = await response.json();
+      return data.data; 
+
+
+    } catch (error) {
+      console.error('Error fetching:', error);
+    }
+  };
+
+
+
+  export default async function RootComments()   {
+
+    const loaderData = await getData();
 
     return (
         <>
-        <article className="comment" data-key="id_1">
+
+        {loaderData.map((item) => (
+
+        <article className="comment" data-key={item.id} key={item.id}>
             <header>
 
-            <VoteButton/>
+            <VoteButton votes={item.likes}/>
 
-                <h2 className="author">amyrobson</h2>
-                <time className="date">1 month ago</time>
+                <img src={item.avatarUrl} className="avatar" />
+
+                <h2 className="author">{item.author}</h2>
+                <time className="date">{item.duration}</time>
 
 				
                 <ReplyButton/>
-				<DeleteButton/>
+				        <DeleteButton/>
                 <EditButton/>
 				
 
             </header>
             <div className="content">
-                BASTY COMMENT Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You’ve nailed the design and the responsiveness at various breakpoints works really well.
-
+                    {item.content}
                 
                 <UpdateForm/>
 
             </div>
         
-            <ChildComments/>
+            <ChildComments item_replies={item.replies} />
 
             
 
         
         </article>
+
+        ))}
+
         </>
     )
 }
-
-export default RootComments;

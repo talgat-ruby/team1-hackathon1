@@ -1,9 +1,9 @@
 
-const VoteButton = () =>  {
+const VoteButton = ({ votes }) =>  {
 
     return (
         <>
-						<div className="vote"><span className="up"></span><span className="num">12</span><span className="down"></span></div>
+						<div className="vote"><span className="up">+</span><span className="num">{votes}</span><span className="down">-</span></div>
 
 
         </>

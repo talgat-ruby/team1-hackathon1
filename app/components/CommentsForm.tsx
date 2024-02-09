@@ -9,14 +9,16 @@ const CommentsForm = () =>  {
 
     return (
         <>
-            <section id="comments">
-            <RootComments />
+           
+                <section id="comments">
+                    <div className="wrapper">
+                    <RootComments />
 
-            <CreateForm2 />
+                    <CreateForm2 />
 
+                    </div>
+                </section>
             
-            </section>
-
         </>
     )
 }
