@@ -1,33 +1,41 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --main-bg-color: #F2F2F2;
+  --Dark-Blue: #334253;
+  --Grayish-Blue: #67727E;
+  --Very-Light-Gray: #F5F6FA;
+  --Light-Gray: #E9EBF0;
+  --White: #FFFFFF;
+  --Moderate-Blue: #5357B6;
+  --Light-Grayish-Blue: #C5C6EF;
+  --Soft-Red: #ED6368;
+  --Pale-Red: #FFB8BB;
+  --comment-bg-color: #FFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+article.comment {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  background-color: var(--comment-bg-color);
+  margin: 10px 0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	background-color: var(--main-bg-color);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+ /* ##Device = Desktops */
+ @media (min-width: 1439px) {
+	.wrapper {
+		padding: 32px 16px;		
+	}
+}
+
+
+
+/* ##Device = Most of the Smartphones Mobiles */
+@media (max-width: 1438px) {
+	.wrapper {
+		padding: 32px 16px;
+	}
 }

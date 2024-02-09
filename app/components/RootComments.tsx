@@ -10,14 +10,14 @@ import UpdateForm from "../components/forms/UpdateForm";
 
 const getData = async () => {
     try {
-        // https://api.stackexchange.com/docs/advanced-search#order=desc&sort=activity&title=next.js&filter=!6WPIomqlomSf5&site=stackoverflow&run=true
-      const response = await fetch('https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&site=stackoverflow');
+
+      const response = await fetch('http://localhost:8081/api/v1/comments?user=amyrobson');
 
       if(!response.ok){
         throw new Error("Failed to fetch");
       }
       const data = await response.json();
-      return data.items; 
+      return data.data; 
 
 
     } catch (error) {
@@ -36,29 +36,29 @@ const getData = async () => {
 
         {loaderData.map((item) => (
 
-        <article className="comment" data-key={item.question_id} key={item.question_id}>
+        <article className="comment" data-key={item.id} key={item.id}>
             <header>
 
-            <VoteButton votes={item.score}/>
+            <VoteButton votes={item.likes}/>
 
-                <h2 className="author">{item.owner.display_name}</h2>
-                <time className="date">{item.creation_date}</time>
+                <h2 className="author">{item.author}</h2>
+                <time className="date">{item.duration}</time>
 
 				
                 <ReplyButton/>
-				<DeleteButton/>
+				        <DeleteButton/>
                 <EditButton/>
 				
 
             </header>
             <div className="content">
-                    {item.title}
+                    {item.content}
                 
                 <UpdateForm/>
 
             </div>
         
-            <ChildComments answer_count={item.answer_count} comment_id={item.question_id}/>
+            <ChildComments item_replies={item.replies} />
 
             
 
