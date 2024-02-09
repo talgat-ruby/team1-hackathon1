@@ -3,7 +3,7 @@ const EditButton = () =>  {
 
     return (
         <>
-				<div className="reply">Edit</div>
+				<div className="edit">Edit</div>
 
 
         </>

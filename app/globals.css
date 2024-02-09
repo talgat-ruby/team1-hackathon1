@@ -24,6 +24,34 @@ body {
 	background-color: var(--main-bg-color);
 }
 
+
+time.date {
+  color: var(--Grayish-Blue);
+}
+
+h2.author {
+  color: var(--Dark-Blue);
+}
+
+.vote {
+  border-radius: 0.5rem;
+  background-color: var(--Very-Light-Gray);
+}
+.vote .up {
+  color: var(--Light-Grayish-Blue);
+}
+.vote .down {
+  color: var(--Light-Grayish-Blue);
+}
+.vote .num {
+  color: var(--Moderate-Blue);
+  font-weight: bold;
+}
+
+.content {
+  color: var(--Grayish-Blue);
+}
+
  /* ##Device = Desktops */
  @media (min-width: 1439px) {
 	.wrapper {

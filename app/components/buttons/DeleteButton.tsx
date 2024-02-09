@@ -3,7 +3,7 @@ const DeleteButton = () =>  {
 
     return (
         <>
-				<div className="reply">Delete</div>
+				<div className="delete">Delete</div>
 
 
         </>

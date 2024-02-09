@@ -41,6 +41,8 @@ const getData = async () => {
 
             <VoteButton votes={item.likes}/>
 
+                <img src={item.avatarUrl} className="avatar" />
+
                 <h2 className="author">{item.author}</h2>
                 <time className="date">{item.duration}</time>
 
