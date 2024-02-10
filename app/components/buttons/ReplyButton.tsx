@@ -1,4 +1,7 @@
 
+"use client";
+import styles from '../../styles/reply.module.css';
+
 const ReplyButton = () =>  {
 
     return (

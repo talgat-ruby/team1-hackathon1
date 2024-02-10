@@ -1,14 +1,13 @@
 
 "use client";
-import styles from '../../styles/delete.module.css';
-
+import styles from '../../styles/create.module.css';
 
 
 const DeleteButton = () =>  {
 
     return (
         <>
-				<div className="delete">Delete</div>
+				<div className={styles.send}>Send</div>
 
 
         </>

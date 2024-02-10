@@ -33,22 +33,6 @@ h2.author {
   color: var(--Dark-Blue);
 }
 
-.vote {
-  border-radius: 0.5rem;
-  background-color: var(--Very-Light-Gray);
-}
-.vote .up {
-  color: var(--Light-Grayish-Blue);
-  cursor: pointer;
-}
-.vote .down {
-  color: var(--Light-Grayish-Blue);
-  cursor: pointer;
-}
-.vote .num {
-  color: var(--Moderate-Blue);
-  font-weight: bold;
-}
 
 .content {
   color: var(--Grayish-Blue);
