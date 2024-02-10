@@ -39,9 +39,11 @@ h2.author {
 }
 .vote .up {
   color: var(--Light-Grayish-Blue);
+  cursor: pointer;
 }
 .vote .down {
   color: var(--Light-Grayish-Blue);
+  cursor: pointer;
 }
 .vote .num {
   color: var(--Moderate-Blue);
