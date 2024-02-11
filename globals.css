@@ -1,0 +1,35 @@
+:root {
+  --main-bg-color: #F2F2F2;
+  --Dark-Blue: #334253;
+  --Grayish-Blue: #67727E;
+  --Very-Light-Gray: #F5F6FA;
+  --Light-Gray: #E9EBF0;
+  --White: #FFFFFF;
+  --Moderate-Blue: #5357B6;
+  --Light-Grayish-Blue: #C5C6EF;
+  --Soft-Red: #ED6368;
+  --Pale-Red: #FFB8BB;
+  --comment-bg-color: #FFF;
+}
+
+
+body {
+	background-color: var(--main-bg-color);
+}
+
+
+ /* ##Device = Desktops */
+ @media (min-width: 1439px) {
+	.wrapper {
+		padding: 32px 16px;		
+	}
+}
+
+
+
+/* ##Device = Most of the Smartphones Mobiles */
+@media (max-width: 1438px) {
+	.wrapper {
+		padding: 32px 16px;
+	}
+}

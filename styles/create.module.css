@@ -1,0 +1,45 @@
+
+
+.send { 
+    
+} 
+
+.comment_form {
+    border-radius: 0.5rem;
+    background-color: var(--comment-bg-color);
+    margin: 10px 0;
+    padding: 16px;
+    font-family: "Rubik";
+    display: flex;
+    flex-direction: column;
+}
+.text_box {
+ 
+}
+
+.text_field {
+    border: 0px;
+    border-radius: 4px;
+    border: 1px solid var(--Light-Gray);
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 100px;
+}
+.btn_box {
+
+}
+.btn {
+    background-color: var(--Moderate-Blue);
+    color: var(--White);
+    border: 0;
+    text-transform: uppercase;
+    font-family: "Rubik";
+    font-size: 14px;
+    padding: 14px 30px;
+    border-radius: 6px;
+}
+
+.avatar {
+
+}
