@@ -12,7 +12,10 @@ import UpdateForm from "../components/forms/UpdateForm";
 const getData = async () => {
   try {
 
-    const response = await fetch('http://localhost:8081/api/v1/comments?user=amyrobson');
+    const response = await fetch(`http://localhost:8081/api/v1/comments?user=${process.env.CURR_USER}`, {
+      cache: 'no-store'
+    }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fetch");
@@ -40,9 +43,11 @@ export default async function RootComments() {
         <article className={styles.comment} data-key={item.id} key={item.id}>
           <header className={styles.header}>
 
-            <img src={item.avatarUrl} className={styles.avatar} />            
+            <img src={item.avatarUrl} className={styles.avatar} />
             <h2 className={styles.author}>{item.author}</h2>
-            <div className={styles.you}>you</div>
+
+            {process.env.CURR_USER === item.author ? <div className={styles.you}>you</div> : ''}
+
             <time className={styles.date}>{item.duration}</time>
 
           </header>
@@ -55,12 +60,15 @@ export default async function RootComments() {
           </div>
 
           <div className={styles.box_collection}>
-            <VoteButton votes={item.likes} />
+            <VoteButton votes={item.likes} commentId={item.id} />
 
             <div className={styles.box_method}>
-              <DeleteButton />
-              <EditButton />
-              <ReplyButton />
+              {process.env.CURR_USER === item.author ? <DeleteButton /> : ''}
+
+              {process.env.CURR_USER === item.author ? <EditButton /> : ''}
+              {process.env.CURR_USER !== item.author ? <ReplyButton /> : ''}
+
+
             </div>
           </div>
           {//<ChildComments item_replies={item.replies} />
