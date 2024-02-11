@@ -1,5 +1,6 @@
 
 import ChildComments from "./ChildComments";
+import styles from '../styles/comment.module.css';
 
 import DeleteButton from "../components/buttons/DeleteButton";
 import ReplyButton from "../components/buttons/ReplyButton";
@@ -9,66 +10,68 @@ import UpdateForm from "../components/forms/UpdateForm";
 
 
 const getData = async () => {
-    try {
+  try {
 
-      const response = await fetch('http://localhost:8081/api/v1/comments?user=amyrobson');
+    const response = await fetch('http://localhost:8081/api/v1/comments?user=amyrobson');
 
-      if(!response.ok){
-        throw new Error("Failed to fetch");
-      }
-      const data = await response.json();
-      return data.data; 
-
-
-    } catch (error) {
-      console.error('Error fetching:', error);
+    if (!response.ok) {
+      throw new Error("Failed to fetch");
     }
-  };
+    const data = await response.json();
+    return data.data;
+
+
+  } catch (error) {
+    console.error('Error fetching:', error);
+  }
+};
 
 
 
-  export default async function RootComments()   {
+export default async function RootComments() {
 
-    const loaderData = await getData();
+  const loaderData = await getData();
 
-    return (
-        <>
+  return (
+    <>
 
-        {loaderData.map((item) => (
+      {loaderData.map((item) => (
 
-        <article className="comment" data-key={item.id} key={item.id}>
-            <header>
+        <article className={styles.comment} data-key={item.id} key={item.id}>
+          <header className={styles.header}>
 
-            <VoteButton votes={item.likes}/>
+            <img src={item.avatarUrl} className={styles.avatar} />            
+            <h2 className={styles.author}>{item.author}</h2>
+            <div className={styles.you}>you</div>
+            <time className={styles.date}>{item.duration}</time>
 
-                <img src={item.avatarUrl} className="avatar" />
+          </header>
+          <div className={styles.content}>
+            {item.content}
 
-                <h2 className="author">{item.author}</h2>
-                <time className="date">{item.duration}</time>
+            {//<UpdateForm/>
+            }
 
-				
-                <ReplyButton/>
-				        <DeleteButton/>
-                <EditButton/>
-				
+          </div>
 
-            </header>
-            <div className="content">
-                    {item.content}
-                
-                <UpdateForm/>
+          <div className={styles.box_collection}>
+            <VoteButton votes={item.likes} />
 
+            <div className={styles.box_method}>
+              <DeleteButton />
+              <EditButton />
+              <ReplyButton />
             </div>
-        
-            <ChildComments item_replies={item.replies} />
+          </div>
+          {//<ChildComments item_replies={item.replies} />
+          }
 
-            
 
-        
+
         </article>
 
-        ))}
+      ))}
 
-        </>
-    )
+    </>
+  )
 }

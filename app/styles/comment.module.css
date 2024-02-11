@@ -1,0 +1,70 @@
+.comment {
+  border-radius: 0.5rem;
+  background-color: var(--comment-bg-color);
+  margin: 10px 0;
+  padding: 16px;
+  font-family: "Rubik";
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-family: "Rubik";
+  font-size: 11px;
+  font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  margin: 0px 16px 0px 0px;
+}
+
+time.date {
+  color: var(--Grayish-Blue);
+  font-size: 16px;
+  margin: 10px 0 0px 0px;
+}
+
+h2.author {
+  color: var(--Dark-Blue);
+  margin: 10px 16px 0px 0px;
+
+}
+
+
+.content {
+  color: var(--Grayish-Blue);
+  font-size: 16px;
+  font-family: "Rubik";
+  margin: 16px 0px 16px 0px;
+
+}
+
+
+.box_collection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box_method {
+  display: flex;
+  flex-direction: row;
+}
+
+.you {
+  background-color: var(--Moderate-Blue);
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Rubik";
+  color: var(--White);
+  margin: 10px 12px 10px 0px;
+  padding: 2px 7px;
+  text-align: center;
+  vertical-align: bottom;
+  height: 13px;
+}
