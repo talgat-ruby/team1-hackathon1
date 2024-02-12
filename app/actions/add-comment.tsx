@@ -2,7 +2,7 @@
 
 export async function addCommentServer(formData) {
   try {
-    const response = await fetch(`http://localhost:8081/api/v1/comments?user=${process.env.CURR_USER}`, {
+    const response = await fetch(`http://localhost:8081/api/v1/comments?user=${process.env.NEXT_PUBLIC_CURR_USER}`, {
       cache: 'no-store',
       method: 'POST',
       headers: {

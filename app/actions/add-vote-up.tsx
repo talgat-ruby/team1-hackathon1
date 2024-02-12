@@ -15,7 +15,7 @@ export async function addVoterUPServer(formData) {
   console.log('commentId' + commentId);
 
   try {
-    const response = await fetch(`http://localhost:8081/api/v1/likes?user=${process.env.CURR_USER}`, {
+    const response = await fetch(`http://localhost:8081/api/v1/likes?user=${process.env.NEXT_PUBLIC_CURR_USER}`, {
       cache: 'no-store',
       method: 'POST',      
       headers: {
