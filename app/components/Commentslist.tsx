@@ -96,7 +96,8 @@ const ClientCommentslist = ({ data, CURR_USER }) => {
 
             </div>
           </div>
-          {//<ChildComments item_replies={item.replies} />
+          {
+          <ChildComments data={item.replies} CURR_USER={process.env.NEXT_PUBLIC_CURR_USER}/>
           }
 
 
