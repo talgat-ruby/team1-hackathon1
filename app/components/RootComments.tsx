@@ -1,5 +1,6 @@
 
 import ChildComments from "./ChildComments";
+import styles from '../styles/comment.module.css';
 
 import DeleteButton from "../components/buttons/DeleteButton";
 import ReplyButton from "../components/buttons/ReplyButton";
@@ -9,66 +10,76 @@ import UpdateForm from "../components/forms/UpdateForm";
 
 
 const getData = async () => {
-    try {
+  try {
 
-      const response = await fetch('http://localhost:8081/api/v1/comments?user=amyrobson');
-
-      if(!response.ok){
-        throw new Error("Failed to fetch");
-      }
-      const data = await response.json();
-      return data.data; 
-
-
-    } catch (error) {
-      console.error('Error fetching:', error);
+    const response = await fetch(`http://localhost:8081/api/v1/comments?user=${process.env.CURR_USER}`, {
+      cache: 'no-store'
     }
-  };
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch");
+    }
+    const data = await response.json();
+    return data.data;
+
+
+  } catch (error) {
+    console.error('Error fetching:', error);
+  }
+};
 
 
 
-  export default async function RootComments()   {
+export default async function RootComments() {
 
-    const loaderData = await getData();
+  const loaderData = await getData();
 
-    return (
-        <>
+  return (
+    <>
 
-        {loaderData.map((item) => (
+      {loaderData.map((item) => (
 
-        <article className="comment" data-key={item.id} key={item.id}>
-            <header>
+        <article className={styles.comment} data-key={item.id} key={item.id}>
+          <header className={styles.header}>
 
-            <VoteButton votes={item.likes}/>
+            <img src={item.avatarUrl} className={styles.avatar} />
+            <h2 className={styles.author}>{item.author}</h2>
 
-                <img src={item.avatarUrl} className="avatar" />
+            {process.env.CURR_USER === item.author ? <div className={styles.you}>you</div> : ''}
 
-                <h2 className="author">{item.author}</h2>
-                <time className="date">{item.duration}</time>
+            <time className={styles.date}>{item.duration}</time>
 
-				
-                <ReplyButton/>
-				        <DeleteButton/>
-                <EditButton/>
-				
+          </header>
+          <div className={styles.content}>
+            {item.content}
 
-            </header>
-            <div className="content">
-                    {item.content}
-                
-                <UpdateForm/>
+            {//<UpdateForm/>
+            }
+
+          </div>
+
+          <div className={styles.box_collection}>
+            <VoteButton votes={item.likes} commentId={item.id} />
+
+            <div className={styles.box_method}>
+              {process.env.CURR_USER === item.author ? <DeleteButton /> : ''}
+
+              {process.env.CURR_USER === item.author ? <EditButton /> : ''}
+              {process.env.CURR_USER !== item.author ? <ReplyButton /> : ''}
+
 
             </div>
-        
-            <ChildComments item_replies={item.replies} />
+          </div>
+          {//<ChildComments item_replies={item.replies} />
+          }
 
-            
 
-        
+
         </article>
 
-        ))}
+      ))}
 
-        </>
-    )
+    </>
+  )
 }

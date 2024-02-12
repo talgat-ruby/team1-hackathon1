@@ -1,21 +1,35 @@
-
+.votes button {
+  border: none;
+  background-color: transparent;
+}
 
 .votes { 
-    border: 1px orange dotted;
+  border-radius: 0.5rem;
+  background-color: var(--Very-Light-Gray);
+  width: 100px;
 }
 .vote {
-    border-radius: 0.5rem;
-    background-color: var(--Very-Light-Gray);
-  }
+    display: flex;
+    flex-wrap: nowrap; 
+    padding: 6px 7px;
+}
   .vote .up {
     color: var(--Light-Grayish-Blue);
     cursor: pointer;
-  }
+    padding: 5px
+}
   .vote .down {
     color: var(--Light-Grayish-Blue);
     cursor: pointer;
-  }
+    padding: 5px 5px 5px 5px
+}
+.vote .down img {
+  padding: 0px 0px 3px 0px
+}
   .vote .num {
     color: var(--Moderate-Blue);
     font-weight: bold;
-  }
+    padding: 5px;
+    font-family: "Rubik";
+
+}

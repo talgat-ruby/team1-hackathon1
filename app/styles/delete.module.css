@@ -1,5 +1,18 @@
-
-
-.delete { 
+.delete {
     border: 1px orange red;
-} 
+}
+
+
+.delete button {
+    border: none;
+    background-color: transparent;
+}
+
+.txt {
+    font-family: "Rubik";
+    color: var(--Soft-Red);
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 15px 0px 8px;
+}
+
