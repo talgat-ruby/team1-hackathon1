@@ -1,5 +1,17 @@
+.reply {
+    border: 0px brown dotted;
+}
 
 
-.reply { 
-    border: 1px brown dotted;
+.reply button {
+    border: none;
+    background-color: transparent;
+}
+
+.reply .txt {
+    font-family: "Rubik";
+    color: var(--Moderate-Blue);
+    font-weight: bold;
+    font-size: 16px;
+
 }
