@@ -1,4 +1,5 @@
 'use server'
+import { redirect } from 'next/navigation'
 
 export async function addCommentServer(formData) {
   try {
@@ -20,6 +21,7 @@ export async function addCommentServer(formData) {
       const err = new Error(body.error.message);
       throw err;
     }
+    redirect(`/`)
 
     return 'Comment posted successfully';
   } catch (error) {

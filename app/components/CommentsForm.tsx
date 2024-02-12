@@ -5,20 +5,20 @@ import CreateForm2 from "../components/forms/CreateForm";
 import RootComments from "../components/RootComments";
 
 
-const CommentsForm = () =>  {
+const CommentsForm = () => {
 
     return (
         <>
-           
-                <section id="comments">
-                    <div className="wrapper">
+
+            <section id="comments">
+                <div className="wrapper">
                     <RootComments />
 
                     <CreateForm2 />
 
-                    </div>
-                </section>
-            
+                </div>
+            </section>
+
         </>
     )
 }

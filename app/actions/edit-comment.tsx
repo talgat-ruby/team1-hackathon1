@@ -1,15 +1,21 @@
 'use server'
 import { redirect } from 'next/navigation'
 
-export async function deleteCommentServer(formData) {
+export async function editCommentServer(formData) {
   try {
 
     const comid = formData.get('commentId');
-    console.log('delete comment:', comid);
+    console.log('Eupdate comment:', comid);
 
     const response = await fetch(`http://localhost:8081/api/v1/comments/${comid}?user=${process.env.NEXT_PUBLIC_CURR_USER}`, {
       cache: 'no-store',
-      method: 'DELETE'
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        content: formData.get('content')
+      }),
     });
 
     if (!response.ok) {
@@ -17,11 +23,10 @@ export async function deleteCommentServer(formData) {
       const err = new Error(body.error.message);
       throw err;
     }
-    redirect(`/`)
 
-    return 'Comment delete successfully';
+    return 'Comment updated successfully';
   } catch (error) {
-    console.error('Error delete comment:', error);
+    console.error('Error update comment:', error);
     throw error;
   }
 }
