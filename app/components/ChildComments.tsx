@@ -7,30 +7,39 @@ import EditButton from "../components/buttons/EditButton";
 import VoteButton from "../components/buttons/VoteButton";
 import UpdateForm from "../components/forms/UpdateForm";
 import DeleteForm from "../components/forms/DeleteForm";
+import ReplyForm from "../components/forms/ReplyForm";
 
 
 
 import { useState } from 'react';
 
 
-const ClientChildComments = ({ data, CURR_USER }) => {
+const ClientChildComments = ({ parentId, data, CURR_USER }) => {
 
-	console.log(data);
 
 	const [editingCommentId, setEditingCommentId] = useState(null);
 	const [deletingCommentId, setDeletingCommentId] = useState(null);
+	const [replyingCommentId, setReplyingCommentId] = useState(null);
+	const [authorToAddressee, setauthorToAddressee] = useState(null);
+
+	
 
 
 	const handleEditClick = (commentId) => {
 
-		console.log('handleEditClick');
 		setEditingCommentId(commentId);
+
+	};
+
+	const handleReplyClick = (commentId, author) => {
+
+		setReplyingCommentId(commentId);
+		setauthorToAddressee(author);
 
 	};
 
 	const handleDeleteClick = (commentId) => {
 
-		console.log('handleDeleteClick');
 		setDeletingCommentId(commentId);
 
 	};
@@ -59,7 +68,9 @@ const ClientChildComments = ({ data, CURR_USER }) => {
 
 							/>
 						) : (
-							item.content
+							<>
+								<span className={styles.addressee}>@{item.addressee}</span> {item.content}
+							</>
 						)}
 
 					</div>
@@ -70,7 +81,6 @@ const ClientChildComments = ({ data, CURR_USER }) => {
 
 
 						<div className={styles.box_method}>
-
 
 							{CURR_USER === item.author ? (
 								<DeleteButton onClickerDelete={() => handleDeleteClick(item.id)} />
@@ -92,12 +102,22 @@ const ClientChildComments = ({ data, CURR_USER }) => {
 								''
 							)}
 
-							{CURR_USER !== item.author ? <ReplyButton /> : ''}
+							{replyingCommentId !== item.id && CURR_USER !== item.author ? (
+								<ReplyButton handleReplyClick={() => handleReplyClick(item.id, item.author)} />
+							) : (
+								''
+							)}
 
+							{replyingCommentId === item.id ? (
+								<ReplyForm item_id={item.id} addressee={authorToAddressee} parentId={parentId}/>
+							) : (
+								<>
+								</>
+							)}
 
 						</div>
 					</div>
-					
+
 
 
 

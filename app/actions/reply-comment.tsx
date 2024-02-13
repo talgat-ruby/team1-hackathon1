@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation'
 
 
-export async function addCommentServer(formData) {
+export async function replyCommentServer(formData) {
 
 
 
@@ -10,12 +10,16 @@ export async function addCommentServer(formData) {
 
 
 
-    const parentId = formData.get('parentId');
     let bodyContent = {};
+
+
     bodyContent = {
       content: formData.get('content'),
       addressee: formData.get('addressee'),
+      parentId: Number(formData.get('parentId'))
     };
+
+
 
 
 

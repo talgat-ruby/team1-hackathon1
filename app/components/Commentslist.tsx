@@ -8,6 +8,7 @@ import EditButton from "../components/buttons/EditButton";
 import VoteButton from "../components/buttons/VoteButton";
 import UpdateForm from "../components/forms/UpdateForm";
 import DeleteForm from "../components/forms/DeleteForm";
+import ReplyForm from "../components/forms/ReplyForm";
 
 
 
@@ -19,7 +20,10 @@ const ClientCommentslist = ({ data, CURR_USER }) => {
 
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [deletingCommentId, setDeletingCommentId] = useState(null);
+	const [replyingCommentId, setReplyingCommentId] = useState(null);
+	const [authorToAddressee, setauthorToAddressee] = useState(null);
 
+	
 
   const handleEditClick = (commentId) => {
 
@@ -34,6 +38,15 @@ const ClientCommentslist = ({ data, CURR_USER }) => {
     setDeletingCommentId(commentId);
 
   };
+
+	const handleReplyClick = (commentId, author) => {
+
+		setReplyingCommentId(commentId);
+		setauthorToAddressee(author);
+
+	};
+
+
 
   return (
     <>
@@ -65,7 +78,7 @@ const ClientCommentslist = ({ data, CURR_USER }) => {
           </div>
 
           <div className={styles.box_collection}>
-            <VoteButton votes={item.likes} commentId={item.id} />
+            <VoteButton votes={item.likes} commentId={item.id} author={item.author} />
 
 
             <div className={styles.box_method}>
@@ -91,13 +104,23 @@ const ClientCommentslist = ({ data, CURR_USER }) => {
                 ''
               )}
 
-              {CURR_USER !== item.author ? <ReplyButton /> : ''}
+              {replyingCommentId !== item.id && CURR_USER !== item.author ? (
+                <ReplyButton handleReplyClick={() => handleReplyClick(item.id, item.author)} />
+              ) : (
+                ''
+              )}
 
+              {replyingCommentId === item.id ? (
+                <ReplyForm item_id={item.id} addressee={authorToAddressee} parentId={item.id} />
+              ) : (
+                <>
+                </>
+              )}
 
             </div>
           </div>
           {
-          <ChildComments data={item.replies} CURR_USER={process.env.NEXT_PUBLIC_CURR_USER}/>
+            <ChildComments parentId={item.id} data={item.replies} CURR_USER={process.env.NEXT_PUBLIC_CURR_USER} />
           }
 
 

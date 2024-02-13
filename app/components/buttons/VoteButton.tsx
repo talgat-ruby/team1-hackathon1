@@ -11,34 +11,36 @@ import { addVoterUPServer } from '../../actions/add-vote-up';
 
 
 
-const VoteButton = ({ votes, commentId }) => {
+const VoteButton = ({ votes, commentId, author }) => {
 
     const [count, setCount] = React.useState<number>(votes);
 
 
     const handleClickUP = (event) => {
         if (!(event.currentTarget.className.includes('clicked'))) {
-            setCount(count + 1);
+
+            setCount((prevValue) => prevValue + 1);
             event.currentTarget.classList.toggle('clicked');
+
         }
 
-        
+
     }
 
     const handleClickDOWN = (event) => {
         if (!(event.currentTarget.className.includes('clicked'))) {
-            setCount(count - 1);
-            event.currentTarget.classList.toggle('clicked');
 
+            setCount((prevValue) => prevValue - 1);
+            event.currentTarget.classList.toggle('clicked');
         }
 
 
-     
+
     }
 
     return (
         <>
-            <div className={styles.votes}> 
+            <div className={styles.votes}>
                 <div className={styles.vote}>
                     <span className={styles.up} onClick={handleClickUP}>
                         <form action={addVoterUPServer}>
