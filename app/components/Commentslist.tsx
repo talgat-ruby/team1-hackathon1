@@ -7,32 +7,36 @@ import ReplyButton from "../components/buttons/ReplyButton";
 import EditButton from "../components/buttons/EditButton";
 import VoteButton from "../components/buttons/VoteButton";
 import UpdateForm from "../components/forms/UpdateForm";
+import DeleteForm from "../components/forms/DeleteForm";
+
 
 
 import { useState } from 'react';
 
 
-const  ClientCommentslist = ({ data , CURR_USER}) => {
+const ClientCommentslist = ({ data, CURR_USER }) => {
 
-  console.log('1234');
+
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [deletingCommentId, setDeletingCommentId] = useState(null);
+
 
   const handleEditClick = (commentId) => {
 
     console.log('handleEditClick');
     setEditingCommentId(commentId);
-    
+
   };
 
+  const handleDeleteClick = (commentId) => {
 
+    console.log('handleDeleteClick');
+    setDeletingCommentId(commentId);
+
+  };
 
   return (
     <>
-    Commentslist list page -+--
-
-
-
-    
 
       {data.map((item) => (
 
@@ -51,7 +55,7 @@ const  ClientCommentslist = ({ data , CURR_USER}) => {
 
             {editingCommentId === item.id ? (
               <UpdateForm
-                initialContent={item.content}
+                initialContent={item.content} item_id={item.id}
 
               />
             ) : (
@@ -63,9 +67,23 @@ const  ClientCommentslist = ({ data , CURR_USER}) => {
           <div className={styles.box_collection}>
             <VoteButton votes={item.likes} commentId={item.id} />
 
-{item.author} - {CURR_USER}
+
             <div className={styles.box_method}>
-              {CURR_USER === item.author ? <DeleteButton /> : ''}
+
+
+              {CURR_USER === item.author ? (
+                <DeleteButton onClickerDelete={() => handleDeleteClick(item.id)} />
+              ) : (
+                ''
+              )}
+
+              {deletingCommentId === item.id ? (
+                <DeleteForm
+                  item_id={item.id}
+
+                />
+              ) : (
+                '')}
 
               {CURR_USER === item.author ? (
                 <EditButton onClickerEdit={() => handleEditClick(item.id)} />
@@ -78,7 +96,8 @@ const  ClientCommentslist = ({ data , CURR_USER}) => {
 
             </div>
           </div>
-          {//<ChildComments item_replies={item.replies} />
+          {
+          <ChildComments data={item.replies} CURR_USER={process.env.NEXT_PUBLIC_CURR_USER}/>
           }
 
 
@@ -87,11 +106,11 @@ const  ClientCommentslist = ({ data , CURR_USER}) => {
 
       ))}
 
-    
+
 
     </>
 
-    );
-  };
-  
-  export default ClientCommentslist;
+  );
+};
+
+export default ClientCommentslist;

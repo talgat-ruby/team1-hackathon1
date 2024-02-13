@@ -1,13 +1,16 @@
 
 "use client";
 
+import { editCommentServer } from '../../actions/edit-comment';
 
 import { useState } from 'react';
 
 
-const UpdateForm = ({ initialContent }) => {
+const UpdateForm = ({ initialContent, item_id }) => {
 
     const [content, setContent] = useState(initialContent);
+    const [idichnik, setItem_id] = useState(item_id);
+    const [submitted, setSubmitted] = useState(false);
 
 
     const handleChange = (event) => {
@@ -17,14 +20,24 @@ const UpdateForm = ({ initialContent }) => {
 
     };
 
-
+    const handleSubmit = async (event) => {
+        console.log('handleSubmit');
+        setSubmitted(true);       
+    };
 
     return (
         <>
-            <form className="comment_form_Edit">
-                <textarea onChange={handleChange} value={content}/>
-                <button type="submit">Update</button>
-            </form>
+            {!submitted ? (
+                <form onSubmit={handleSubmit} action={editCommentServer} className="comment_form_Edit">
+                    <textarea onChange={handleChange} name="content" value={content} />
+                    <input type="hidden" name="commentId" value={idichnik} />
+
+
+                    <button type="submit">Update</button>
+                </form>
+            ) : (
+                <div>{content}</div>
+            )}
         </>
     )
 }

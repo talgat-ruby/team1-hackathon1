@@ -1,31 +1,113 @@
+"use client";
+import styles from '../styles/comment.module.css';
+
 import DeleteButton from "../components/buttons/DeleteButton";
 import ReplyButton from "../components/buttons/ReplyButton";
 import EditButton from "../components/buttons/EditButton";
 import VoteButton from "../components/buttons/VoteButton";
+import UpdateForm from "../components/forms/UpdateForm";
+import DeleteForm from "../components/forms/DeleteForm";
 
 
 
+import { useState } from 'react';
 
-const ChildComments = (item_replies) => {
+
+const ClientChildComments = ({ data, CURR_USER }) => {
+
+	console.log(data);
+
+	const [editingCommentId, setEditingCommentId] = useState(null);
+	const [deletingCommentId, setDeletingCommentId] = useState(null);
+
+
+	const handleEditClick = (commentId) => {
+
+		console.log('handleEditClick');
+		setEditingCommentId(commentId);
+
+	};
+
+	const handleDeleteClick = (commentId) => {
+
+		console.log('handleDeleteClick');
+		setDeletingCommentId(commentId);
+
+	};
 
 	return (
 		<>
-			<article className="comment" data-key={item_replies.id} data-parent-id={item_replies.id}>
-				<header>
-					<VoteButton votes={item_replies.likes} />
+			{data.map((item) => (
+				<article className={styles.comment} data-key={item.id} key={item.id}>
+					<header className={styles.header}>
 
-					<h2 className="author">{item_replies.author}</h2>
-					<time className="date">{item_replies.duration}</time>
+						<img src={item.avatarUrl} className={styles.avatar} />
+						<h2 className={styles.author}>{item.author}</h2>
 
-					<ReplyButton />
-					<DeleteButton />
-					<EditButton />
+						{CURR_USER === item.author ? <div className={styles.you}>you</div> : ''}
 
-				</header>
-				<div className="content">{item_replies.content}</div>
-			</article>
+						<time className={styles.date}>{item.duration}</time>
+
+					</header>
+
+
+					<div className={styles.content}>
+
+						{editingCommentId === item.id ? (
+							<UpdateForm
+								initialContent={item.content} item_id={item.id}
+
+							/>
+						) : (
+							item.content
+						)}
+
+					</div>
+
+
+					<div className={styles.box_collection}>
+						<VoteButton votes={item.likes} commentId={item.id} />
+
+
+						<div className={styles.box_method}>
+
+
+							{CURR_USER === item.author ? (
+								<DeleteButton onClickerDelete={() => handleDeleteClick(item.id)} />
+							) : (
+								''
+							)}
+
+							{deletingCommentId === item.id ? (
+								<DeleteForm
+									item_id={item.id}
+
+								/>
+							) : (
+								'')}
+
+							{CURR_USER === item.author ? (
+								<EditButton onClickerEdit={() => handleEditClick(item.id)} />
+							) : (
+								''
+							)}
+
+							{CURR_USER !== item.author ? <ReplyButton /> : ''}
+
+
+						</div>
+					</div>
+					
+
+
+
+
+				</article>
+			))}
+
 		</>
-	)
-}
 
-export default ChildComments;
+	);
+};
+
+export default ClientChildComments;
