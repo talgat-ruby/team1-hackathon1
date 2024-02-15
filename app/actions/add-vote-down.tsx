@@ -4,15 +4,12 @@ import { error } from "console";
 
 
 export async function addVoterDownServer(formData) {
-  console.log('rDown');
-  console.log(formData);
+
   const commentId = formData.get('commentId');
   const rate = formData.get('rate');
 
   const stri = JSON.stringify({ "rate": Number(rate), "commentId": Number(commentId) });
-  console.log(stri);
 
-  console.log('commentId' + commentId);
 
   try {
     const response = await fetch(`http://localhost:8081/api/v1/likes?user=${process.env.NEXT_PUBLIC_CURR_USER}`, {

@@ -68,3 +68,9 @@ h2.author {
   vertical-align: bottom;
   height: 13px;
 }
+
+.addressee {
+  font-weight: bold;
+  font-family: "Rubik";
+  color: var(--Moderate-Blue);
+}
